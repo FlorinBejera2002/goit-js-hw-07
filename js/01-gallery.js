@@ -28,7 +28,7 @@ galleryList.addEventListener('click', (event) => {
 
   const clickedElement = event.target;
 
-  if (clickedElement.nodeName === 'IMG') {
+  if (clickedElement.nodeName !== 'IMG') {
     return;
   }
 

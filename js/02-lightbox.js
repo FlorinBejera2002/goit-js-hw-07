@@ -1,30 +1,32 @@
-import { galleryItems } from './gallery-items.js';
+`use strict`
 
-// Crearea și randarea markup-ului galeriei
-const galleryList = document.querySelector('.gallery');
+import { galleryItems } from "./gallery-items.js";
+// Change code below this line
 
-const createGalleryMarkup = (items) => {
-  return items
-    .map(({ preview, original, description }) => {
-      return `
-        <li class="gallery__item">
-          <a class="gallery__link" href="${original}">
-            <img class="gallery__image" src="${preview}" alt="${description}" />
+const galleryElement = document.querySelector(".gallery");
+
+// Crearea si randarea unui markup
+
+function createGallery() {
+  const galleryMarkup = galleryItems
+    .map(
+      (item) => `
+         <li class="gallery__item">
+          <a class="gallery__link" href="${item.original}">
+            <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
           </a>
         </li>
-      `;
-    })
-    .join('');
-};
+      `
+    )
+    .join("");
+  galleryElement.insertAdjacentHTML("afterbegin", galleryMarkup);
+}
 
-galleryList.innerHTML = createGalleryMarkup(galleryItems);
+createGallery();
 
-// Inițializarea SimpleLightbox după crearea și adăugarea elementelor galeriei
-const gallery = new SimpleLightbox('.gallery a', {
-  captions: {
-    captionDelay: 250,
-    captionPosition: 'bottom',
-  },
+
+const simpleLightbox = new SimpleLightbox(".gallery a", {
+captionsData: "alt",
+captionDelay: 250,
 });
 
-console.log(galleryItems);
